@@ -40,7 +40,7 @@ Meteor.publish(Submissions.adminPublicationName, function () {
 
 Meteor.publish(Submissions.feedPublicationName, function () {
   if (this.userId) {
-    return Submissions.collection.find();
+    return Submissions.collection.find({ status: 'approved', publication: true });
   }
   return this.ready();
 });
