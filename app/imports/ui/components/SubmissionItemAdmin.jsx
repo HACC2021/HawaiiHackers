@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
@@ -12,13 +13,15 @@ class SubmissionItemAdmin extends React.Component {
   }
 
   handleClick() {
+    const value = 30;
     Submissions.collection.update(this.props.submission._id,
       { $set: { status: 'approved' } },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Submission approved', 'success');
+          Meteor.call('updatePoints', this.props.submission.owner, value);
+          swal('Success', 'Submission approved and points awarded', 'success');
         }
       });
 

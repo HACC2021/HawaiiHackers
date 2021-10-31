@@ -11,6 +11,9 @@ import ListSubmission from '../pages/ListSubmission';
 import ListSubmissionAdmin from '../pages/ListSubmissionAdmin';
 import AddSubmission from '../pages/AddSubmission';
 import EditSubmission from '../pages/EditSubmission';
+import AddProfile from '../pages/AddProfile';
+import EditProfile from '../pages/EditProfile';
+import Profile from '../pages/Profile';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -28,6 +31,9 @@ class App extends React.Component {
             <Route path="/signin" component={Signin}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
+            <ProtectedRoute path="/add-profile" component={AddProfile}/>
+            <ProtectedRoute path="/edit-profile/:_id" component={EditProfile}/>
+            <ProtectedRoute path="/profile" component={Profile}/>
             <ProtectedRoute path="/add" component={AddSubmission}/>
             <ProtectedRoute path="/list" component={ListSubmission}/>
             <ProtectedRoute path="/edit/:_id" component={EditSubmission}/>
