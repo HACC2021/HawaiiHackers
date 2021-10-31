@@ -11,13 +11,13 @@ function createUser(email, password, role) {
     email: email,
     password: password,
   });
-  if (role) {
+  if (role === 'admin') {
     Roles.createRole(role, { unlessExists: true });
-    Roles.addUsersToRoles(userID, role);
+    Roles.addUsersToRoles(userID, 'admin');
   }
 }
 
-/** When running app for first time, pass a settings file to set up a default user account. */
+// When running app for first time, pass a settings file to set up a default user account.
 if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultAccounts) {
     console.log('Creating the default user(s)');

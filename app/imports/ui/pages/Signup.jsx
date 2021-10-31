@@ -8,18 +8,18 @@ import { Accounts } from 'meteor/accounts-base';
  * Signup component is similar to signin component, but we create a new user instead.
  */
 class Signup extends React.Component {
-  /** Initialize state fields. */
+  /* Initialize state fields. */
   constructor(props) {
     super(props);
     this.state = { email: '', password: '', error: '', redirectToReferer: false };
   }
 
-  /** Update the form controls each time the user interacts with them. */
+  /* Update the form controls each time the user interacts with them. */
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
   }
 
-  /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
+  /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
     const { email, password } = this.state;
     Accounts.createUser({ email, username: email, password }, (err) => {
@@ -31,7 +31,7 @@ class Signup extends React.Component {
     });
   }
 
-  /** Display the signup form. Redirect to add page after successful registration and login. */
+  /* Display the signup form. Redirect to add page after successful registration and login. */
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/add' } };
     // if correct authentication, redirect to from: page instead of signup screen
@@ -39,7 +39,7 @@ class Signup extends React.Component {
       return <Redirect to={from}/>;
     }
     return (
-      <Container>
+      <Container id="signup-page">
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
           <Grid.Column>
             <Header as="h2" textAlign="center">
@@ -49,6 +49,7 @@ class Signup extends React.Component {
               <Segment stacked>
                 <Form.Input
                   label="Email"
+                  id="signup-form-email"
                   icon="user"
                   iconPosition="left"
                   name="email"
@@ -58,6 +59,7 @@ class Signup extends React.Component {
                 />
                 <Form.Input
                   label="Password"
+                  id="signup-form-password"
                   icon="lock"
                   iconPosition="left"
                   name="password"
@@ -65,7 +67,7 @@ class Signup extends React.Component {
                   type="password"
                   onChange={this.handleChange}
                 />
-                <Form.Button content="Submit"/>
+                <Form.Button id="signup-form-submit" content="Submit"/>
               </Segment>
             </Form>
             <Message>
@@ -87,7 +89,7 @@ class Signup extends React.Component {
   }
 }
 
-/** Ensure that the React Router location object is available in case we need to redirect. */
+/* Ensure that the React Router location object is available in case we need to redirect. */
 Signup.propTypes = {
   location: PropTypes.object,
 };
