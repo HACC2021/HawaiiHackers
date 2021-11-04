@@ -14,6 +14,7 @@ import EditSubmission from '../pages/EditSubmission';
 import AddProfile from '../pages/AddProfile';
 import EditProfile from '../pages/EditProfile';
 import Profile from '../pages/Profile';
+import AddTask from '../pages/AddTask';
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -40,6 +41,7 @@ class App extends React.Component {
             <ProtectedRoute path="/list" component={ListSubmission}/>
             <ProtectedRoute path="/edit/:_id" component={EditSubmission}/>
             <AdminProtectedRoute path="/admin" component={ListSubmissionAdmin}/>
+            <AdminProtectedRoute path="/addTask" component={AddTask}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>
