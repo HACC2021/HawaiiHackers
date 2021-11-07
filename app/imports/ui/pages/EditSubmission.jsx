@@ -36,7 +36,7 @@ class EditSubmission extends React.Component {
             <Segment>
               <DateField name='date'/>
               <LongTextField name='description'/>
-              <BoolField name='publication' appearance="checkbox" label='Publish this submission to other users'/>
+              <BoolField name='publication' appearance="checkbox" label='Share with other users'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
               <HiddenField name='owner' />

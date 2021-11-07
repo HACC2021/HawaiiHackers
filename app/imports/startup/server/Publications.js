@@ -4,6 +4,7 @@ import { Stuffs } from '../../api/stuff/Stuff';
 import { Submissions } from '../../api/submission/Submission';
 import { Profiles } from '../../api/profile/Profile';
 import { Tasks } from '../../api/task/Task';
+import { Rewards } from '../../api/reward/Reward';
 
 // User-level publication.
 // If logged in, then publish documents owned by this user. Otherwise publish nothing.
@@ -23,6 +24,14 @@ Meteor.publish(Tasks.userPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Rewards.userPublicationName, function () {
+  if (this.userId) {
+    const username = Meteor.users.findOne(this.userId).username;
+    return Rewards.collection.find({ owner: username });
+  }
+  return this.ready();
+});
+
 // Admin-level publication.
 // If logged in and with admin role, then publish all documents from all users. Otherwise publish nothing.
 Meteor.publish(Stuffs.adminPublicationName, function () {
@@ -35,6 +44,20 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
 Meteor.publish(Tasks.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Tasks.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Rewards.adminPublicationName, function () {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+    return Rewards.collection.find();
+  }
+  return this.ready();
+});
+
+Meteor.publish(Rewards.approvedPublicationName, function () {
+  if (this.userId) {
+    return Rewards.collection.find({ status: 'approved' });
   }
   return this.ready();
 });

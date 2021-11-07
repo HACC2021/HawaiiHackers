@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Button, Card, Icon } from 'semantic-ui-react';
+import { _ } from 'lodash';
+import { Card, Icon, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import swal from 'sweetalert';
@@ -27,10 +28,11 @@ class ProfileItem extends React.Component {
       <Card>
         <Card.Content>
           <Card.Header>{this.props.profile.first} {this.props.profile.last}</Card.Header>
-          <Card.Meta>{this.props.profile.owner}</Card.Meta>
+          <Card.Meta>{this.props.profile.owner} | {this.props.profile.role}</Card.Meta>
           <Card.Description>
             <Icon name='leaf' color='green'/>{this.props.profile.points} Pono Points
-            <br/><Button color='blue' onClick={this.handleClick}>Reedem</Button>
+            <br/>Rewards: {_.map(this.props.profile.rewards,
+              (rewards, index) => <Label key={index} color='blue'>{rewards}</Label>)}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -46,7 +48,9 @@ ProfileItem.propTypes = {
   profile: PropTypes.shape({
     first: PropTypes.string,
     last: PropTypes.string,
+    rewards: PropTypes.array,
     owner: PropTypes.string,
+    role: PropTypes.string,
     _id: PropTypes.string,
     points: PropTypes.number,
   }).isRequired,

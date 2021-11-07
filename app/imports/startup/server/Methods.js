@@ -11,4 +11,20 @@ Meteor.methods({
       { $inc: { points: updateValue } },
     );
   },
+  'addReward'(owner, reward) {
+    check(owner, String);
+    check(reward, String);
+    Profiles.collection.update(
+      { owner: owner },
+      { $push: { rewards: reward } },
+    );
+  },
+  'deleteReward'(owner, reward) {
+    check(owner, String);
+    check(reward, String);
+    Profiles.collection.update(
+      { owner: owner },
+      { $pull: { rewards: reward } },
+    );
+  },
 });

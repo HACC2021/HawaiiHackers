@@ -1,35 +1,29 @@
 import React from 'react';
 import { Grid, Segment, Header } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, DateField, SubmitField, LongTextField, BoolField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, NumField, SubmitField, LongTextField, TextField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Submissions } from '../../api/submission/Submission';
+import { Rewards } from '../../api/reward/Reward';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  date: {
-    type: Date,
-    defaultValue: new Date(),
-  },
+  title: String,
   description: String,
-  publication: {
-    type: Boolean,
-    defaultValue: true,
-  },
+  points: Number,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for adding a document. */
-class AddSubmission extends React.Component {
+class AddReward extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { date, description, publication } = data;
+    const { title, description, points } = data;
     const owner = Meteor.user().username;
-    Submissions.collection.insert({ date, description, publication, owner },
+    Rewards.collection.insert({ title, description, points, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -46,12 +40,12 @@ class AddSubmission extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Add Submission</Header>
+          <Header as="h2" textAlign="center">Add Reward</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <DateField name='date'/>
+              <TextField name='title'/>
               <LongTextField name='description'/>
-              <BoolField name='publication' appearance="checkbox" label='Share with other users'/>
+              <NumField name='points' decimal={false} label='Points required'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
@@ -62,4 +56,4 @@ class AddSubmission extends React.Component {
   }
 }
 
-export default AddSubmission;
+export default AddReward;
