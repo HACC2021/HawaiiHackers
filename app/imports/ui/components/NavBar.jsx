@@ -53,7 +53,7 @@ function NavBar(props) {
                 {props.role === 'local business/organization' || Roles.userIsInRole(Meteor.userId(), 'admin') ?
                   <Dropdown.Menu>
                     <Dropdown.Item text="View Rewards" as={NavLink} exact to="/rewards"/>
-                    <Dropdown.Item text="Redeemed Rewards" as={NavLink} exact to="/"/>
+                    <Dropdown.Item text="Redeemed Rewards" as={NavLink} exact to="/rewards/redeemed"/>
                     <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/rewards/add"/>
                     <Dropdown.Item icon="history" text="My Rewards" as={NavLink} exact to="/rewards/list"/>
                     {Roles.userIsInRole(Meteor.userId(), 'admin') ?
@@ -62,7 +62,7 @@ function NavBar(props) {
                   </Dropdown.Menu> :
                   <Dropdown.Menu>
                     <Dropdown.Item text="View Rewards" as={NavLink} exact to="/rewards"/>
-                    <Dropdown.Item text="Redeemed Rewards" as={NavLink} exact to="/"/>
+                    <Dropdown.Item text="Redeemed Rewards" as={NavLink} exact to="/rewards/redeemed"/>
                   </Dropdown.Menu>}
               </Dropdown>
             </Menu.Item>,

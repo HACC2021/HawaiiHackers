@@ -16,7 +16,7 @@ class RewardItem extends React.Component {
           redeemedBy: this.props.reward.redeemedBy[index],
         },
       });
-    Meteor.call('deleteReward', this.props.reward.redeemedBy[index], this.props.reward.title);
+    Meteor.call('deleteReward', this.props.reward.redeemedBy[index], this.props.reward.title, this.props.reward.owner, this.props.reward.description);
   }
 
   render() {
@@ -44,6 +44,7 @@ RewardItem.propTypes = {
     points: PropTypes.number,
     status: PropTypes.string,
     redeemedBy: PropTypes.array,
+    owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };

@@ -8,7 +8,7 @@ import { Profiles } from '../../api/profile/Profile';
 import { Rewards } from '../../api/reward/Reward';
 
 /** Renders a single row in the List Reward table. See pages/ListReward.jsx. */
-class RewardItemPublic extends React.Component {
+class RewardItemApproved extends React.Component {
 
   constructor(props) {
     super(props);
@@ -27,7 +27,7 @@ class RewardItemPublic extends React.Component {
             redeemedBy: Meteor.user().username,
           },
         });
-      Meteor.call('addReward', Meteor.user().username, this.props.reward.title);
+      Meteor.call('addReward', Meteor.user().username, this.props.reward.title, this.props.reward.owner, this.props.reward.description);
       swal('Success', `You redeemed ${value} points. You have ${remainingPoints} points remaining`, 'success');
     } else {
       swal('Error', 'You do not have enough points', 'error');
@@ -55,7 +55,7 @@ class RewardItemPublic extends React.Component {
 }
 
 // Require a document to be passed to this component.
-RewardItemPublic.propTypes = {
+RewardItemApproved.propTypes = {
   reward: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
@@ -67,4 +67,4 @@ RewardItemPublic.propTypes = {
 };
 
 // Wrap this component in withRouter since we use the <Link> React Router element.
-export default RewardItemPublic;
+export default RewardItemApproved;

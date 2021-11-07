@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { Roles } from 'meteor/alanning:roles';
 import { Container, Header, Loader, Card, Button, Icon } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -19,11 +20,13 @@ class RewardsPage extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
-    const buttonStyle = { marginBottom: '20px' };
     return (
       <Container>
         <Header as="h2" textAlign="center">Rewards</Header>
-        <Button as={NavLink} exact to="/rewards/add" style={buttonStyle} color='blue'><Icon name='plus'/>Add</Button>
+        {this.props.role === 'local business/organization' || Roles.userIsInRole(Meteor.userId(), 'admin') ?
+          <Button as={NavLink} exact to="/rewards/add" color='blue'><Icon name='plus'/>Add</Button>
+          : ''}
+        <Header as="h3">Available Points: <Icon name='leaf' color='green'/>{this.props.points}</Header>
         <Card.Group itemsPerRow={4}>
           {this.props.rewards.map((reward, profile) => <RewardItemApproved key={reward._id} reward={reward} profile={profile}/>)}
         </Card.Group>
@@ -34,6 +37,7 @@ class RewardsPage extends React.Component {
 
 // Require an array of Reward documents in the props.
 RewardsPage.propTypes = {
+  points: PropTypes.number,
   role: PropTypes.string,
   rewards: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -47,7 +51,9 @@ export default withTracker(() => {
   const profiles = Profiles.collection.find({}).fetch();
   const currentUser = Meteor.user() ? Meteor.user().username : '';
   const role = _.map(Profiles.collection.find({ owner: currentUser }).fetch(), 'role')[0];
+  const points = _.map(Profiles.collection.find({ owner: currentUser }).fetch(), 'points')[0];
   return {
+    points,
     role,
     rewards,
     profiles,

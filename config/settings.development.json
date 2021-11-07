@@ -1,12 +1,14 @@
 {
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
-    { "email": "john@foo.com", "password": "changeme" }
+    { "email": "john@foo.com", "password": "changeme" },
+    { "email": "company@foo.com", "password": "changeme" }
   ],
 
   "defaultProfiles": [
     { "owner": "admin@foo.com", "first": "admin", "last": "admin" },
-    { "owner": "john@foo.com", "first": "John", "last": "Foo", "points": 30 }
+    { "owner": "john@foo.com", "first": "John", "last": "Foo", "points": 30 },
+    { "owner": "company@foo.com", "first": "company", "last": "company", "role": "local business/organization"}
   ],
 
   "defaultData": [
@@ -15,5 +17,14 @@
       "publication": "true",
       "owner": "john@foo.com",
       "status": "approved" }
+  ],
+
+  "defaultRewards": [
+    { "title": "Free Shave Ice",
+      "description": "Redeem your points and get (1) small shave ice for free.",
+      "points": "100",
+      "owner": "company@foo.com",
+      "status": "approved" }
   ]
 }
+
