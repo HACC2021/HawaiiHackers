@@ -25,7 +25,7 @@ function NavBar(props) {
                   <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/add"/>
                   <Dropdown.Item icon="history" text="My Submissions" as={NavLink} exact to="/list"/>
                   {Roles.userIsInRole(Meteor.userId(), 'admin') ?
-                    <Dropdown.Item icon="check" text="Review" as={NavLink} exact to="/review/submissions"/> :
+                    <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/review/submissions"/> :
                     ''}
                 </Dropdown.Menu>
               </Dropdown>
@@ -39,7 +39,7 @@ function NavBar(props) {
                     <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/addTask"/>
                     <Dropdown.Item icon="history" text="My Challenges" as={NavLink} exact to="/"/>
                     {Roles.userIsInRole(Meteor.userId(), 'admin') ?
-                      <Dropdown.Item icon="check" text="Review" as={NavLink} exact to="/"/> :
+                      <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/"/> :
                       ''}
                   </Dropdown.Menu> :
                   <Dropdown.Menu>
@@ -57,7 +57,7 @@ function NavBar(props) {
                     <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/rewards/add"/>
                     <Dropdown.Item icon="history" text="My Rewards" as={NavLink} exact to="/rewards/list"/>
                     {Roles.userIsInRole(Meteor.userId(), 'admin') ?
-                      <Dropdown.Item icon="check" text="Review" as={NavLink} exact to="/review/rewards"/> :
+                      <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/review/rewards"/> :
                       ''}
                   </Dropdown.Menu> :
                   <Dropdown.Menu>

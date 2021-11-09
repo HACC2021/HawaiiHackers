@@ -18,7 +18,7 @@ class EditReward extends React.Component {
     const { title, description, points, _id } = data;
     Rewards.collection.update(_id, { $set: { title, description, points } }, (error) => (error ?
       swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+      swal('Success', 'Reward updated successfully', 'success')));
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.

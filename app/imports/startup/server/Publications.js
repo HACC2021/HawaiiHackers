@@ -99,6 +99,13 @@ Meteor.publish(Profiles.adminPublicationName, function () {
   return this.ready();
 });
 
+Meteor.publish(Profiles.feedPublicationName, function () {
+  if (this.userId) {
+    return Profiles.collection.find();
+  }
+  return this.ready();
+});
+
 // alanning:roles publication
 // Recommended code to publish roles for each user.
 Meteor.publish(null, function () {

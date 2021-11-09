@@ -13,8 +13,11 @@ class ProfilesCollection {
     this.collection = new Mongo.Collection(this.name);
     // Define the structure of each document in the collection.
     this.schema = new SimpleSchema({
-      first: String,
-      last: String,
+      name: String,
+      picture: {
+        type: String,
+        optional: true,
+      },
       points: {
         type: Number,
         defaultValue: 0,
@@ -39,6 +42,7 @@ class ProfilesCollection {
     // Define names for publications and subscriptions
     this.userPublicationName = `${this.name}.publication.user`;
     this.adminPublicationName = `${this.name}.publication.admin`;
+    this.feedPublicationName = `${this.name}.publication.feed`;
   }
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Table, Button, Icon } from 'semantic-ui-react';
+import { Table, Button, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { Submissions } from '../../api/submission/Submission';
@@ -38,6 +38,7 @@ class SubmissionItemAdmin extends React.Component {
       <Table.Row>
         <Table.Cell>{this.props.submission.date.toLocaleDateString()}</Table.Cell>
         <Table.Cell>{this.props.submission.description}</Table.Cell>
+        <Table.Cell><Image src={this.props.submission.picture}/></Table.Cell>
         <Table.Cell>{publication}</Table.Cell>
         <Table.Cell>{this.props.submission.owner}</Table.Cell>
         {this.props.submission.status === 'approved' ?
@@ -54,6 +55,7 @@ SubmissionItemAdmin.propTypes = {
   submission: PropTypes.shape({
     date: PropTypes.date,
     description: PropTypes.string,
+    picture: PropTypes.string,
     publication: PropTypes.boolean,
     status: PropTypes.string,
     _id: PropTypes.string,

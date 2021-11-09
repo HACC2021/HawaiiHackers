@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Loader, Header, Segment } from 'semantic-ui-react';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, HiddenField, SubmitField, LongTextField, DateField, BoolField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, HiddenField, SubmitField, LongTextField, DateField, BoolField, TextField } from 'uniforms-semantic';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -15,10 +15,10 @@ class EditSubmission extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { date, description, publication, _id } = data;
-    Submissions.collection.update(_id, { $set: { date, description, publication } }, (error) => (error ?
+    const { date, description, picture, publication, _id } = data;
+    Submissions.collection.update(_id, { $set: { date, description, picture, publication } }, (error) => (error ?
       swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+      swal('Success', 'Submission updated successfully', 'success')));
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -36,6 +36,7 @@ class EditSubmission extends React.Component {
             <Segment>
               <DateField name='date'/>
               <LongTextField name='description'/>
+              <TextField name='picture' placeholder='URL to picture'/>
               <BoolField name='publication' appearance="checkbox" label='Share with other users'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>

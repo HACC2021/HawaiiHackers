@@ -25,6 +25,7 @@ class ListSubmissionAdmin extends React.Component {
             <Table.Row>
               <Table.HeaderCell>Date</Table.HeaderCell>
               <Table.HeaderCell>Description</Table.HeaderCell>
+              <Table.HeaderCell>Picture</Table.HeaderCell>
               <Table.HeaderCell>Publication</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
               <Table.HeaderCell>Status</Table.HeaderCell>

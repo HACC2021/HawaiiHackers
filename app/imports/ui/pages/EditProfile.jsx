@@ -15,10 +15,10 @@ class EditProfile extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { first, last, role, _id } = data;
-    Profiles.collection.update(_id, { $set: { first, last, role } }, (error) => (error ?
+    const { name, role, picture, _id } = data;
+    Profiles.collection.update(_id, { $set: { name, role, picture } }, (error) => (error ?
       swal('Error', error.message, 'error') :
-      swal('Success', 'Item updated successfully', 'success')));
+      swal('Success', 'Profile updated successfully', 'success')));
   }
 
   // If the subscription(s) have been received, render the page, otherwise show a loading icon.
@@ -34,8 +34,8 @@ class EditProfile extends React.Component {
           <Header as="h2" textAlign="center">Edit Profile</Header>
           <AutoForm schema={bridge} onSubmit={data => this.submit(data)} model={this.props.doc}>
             <Segment>
-              <TextField name='first'/>
-              <TextField name='last'/>
+              <TextField name='name' placeholder='Full name'/>
+              <TextField name='picture' placeholder='URL to picture'/>
               <SelectField name='role'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>

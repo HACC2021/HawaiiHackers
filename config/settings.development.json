@@ -6,14 +6,18 @@
   ],
 
   "defaultProfiles": [
-    { "owner": "admin@foo.com", "first": "admin", "last": "admin" },
-    { "owner": "john@foo.com", "first": "John", "last": "Foo", "points": 30 },
-    { "owner": "company@foo.com", "first": "company", "last": "company", "role": "local business/organization"}
+    { "owner": "admin@foo.com", "name": "Department of Land and Natural Resources",
+      "picture": "https://dlnr.hawaii.gov/alalaproject/files/2020/03/DLNR_logo_withMask_transparent-1.jpg"},
+    { "owner": "john@foo.com", "name": "John Foo", "points": 30,
+      "picture": "https://react.semantic-ui.com/images/avatar/small/elliot.jpg" },
+    { "owner": "company@foo.com", "name": "Company Name", "role": "local business/organization",
+      "picture":  "https://react.semantic-ui.com/images/avatar/large/nan.jpg"}
   ],
 
   "defaultData": [
     { "date": "2021-10-29",
       "description": "I help protect Hawaii's resources by hiking on sanctioned trails and being safe.",
+      "picture": "https://dlnr.hawaii.gov/wp-content/uploads/2012/10/Trails.jpg",
       "publication": "true",
       "owner": "john@foo.com",
       "status": "approved" }

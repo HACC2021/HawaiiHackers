@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Button, Card, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
@@ -35,11 +36,12 @@ class RewardItemApproved extends React.Component {
   }
 
   render() {
+    const name = _.map(Profiles.collection.find({ owner: this.props.reward.owner }).fetch(), 'name')[0];
     return (
       <Card>
         <Card.Content>
           <Card.Header>{this.props.reward.title}</Card.Header>
-          <Card.Meta>{this.props.reward.owner}</Card.Meta>
+          <Card.Meta>{name} | {this.props.reward.owner}</Card.Meta>
           <Card.Description>
             {this.props.reward.description}
           </Card.Description>
@@ -66,5 +68,15 @@ RewardItemApproved.propTypes = {
   }).isRequired,
 };
 
-// Wrap this component in withRouter since we use the <Link> React Router element.
-export default RewardItemApproved;
+export default withTracker(() => {
+  // Get access to Submission documents.
+  const subscription = Meteor.subscribe(Profiles.feedPublicationName);
+  // Determine if the subscription is ready
+  const ready = subscription.ready();
+  // Get the Submission documents
+  const profiles = Profiles.collection.find().fetch();
+  return {
+    profiles,
+    ready,
+  };
+})(RewardItemApproved);

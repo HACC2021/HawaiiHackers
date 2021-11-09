@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -16,6 +16,7 @@ class SubmissionItem extends React.Component {
       <Table.Row>
         <Table.Cell>{this.props.submission.date.toLocaleDateString()}</Table.Cell>
         <Table.Cell>{this.props.submission.description}</Table.Cell>
+        <Table.Cell><Image src={this.props.submission.picture}/></Table.Cell>
         <Table.Cell>{publication}</Table.Cell>
         <Table.Cell>
           <Link to={`/edit/${this.props.submission._id}`}>Edit</Link>
@@ -31,6 +32,7 @@ SubmissionItem.propTypes = {
   submission: PropTypes.shape({
     date: PropTypes.date,
     description: PropTypes.string,
+    picture: PropTypes.string,
     publication: PropTypes.boolean,
     status: PropTypes.string,
     _id: PropTypes.string,

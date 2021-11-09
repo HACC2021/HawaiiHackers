@@ -11,12 +11,15 @@ import { Profiles } from '../../api/profile/Profile';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
-  first: String,
-  last: String,
+  name: String,
   role: {
     type: String,
     allowedValues: ['resident', 'visitor', 'local business/organization'],
     defaultValue: 'resident',
+  },
+  picture: {
+    type: String,
+    optional: true,
   },
 });
 
@@ -31,14 +34,14 @@ class AddProfile extends React.Component {
 
   // On submit, insert the data.
   submit(data) {
-    const { first, last, role } = data;
+    const { name, role, picture } = data;
     const owner = Meteor.user().username;
-    Profiles.collection.insert({ first, last, role, owner },
+    Profiles.collection.insert({ name, role, picture, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Item added successfully', 'success');
+          swal('Success', 'Profile added successfully', 'success');
           this.setState({ redirectToReferer: true });
         }
       });
@@ -57,8 +60,8 @@ class AddProfile extends React.Component {
           <Header as="h2" textAlign="center">Add Profile</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <TextField name='first'/>
-              <TextField name='last'/>
+              <TextField name='name' placeholder='Full name'/>
+              <TextField name='picture' placeholder='URL to picture'/>
               <SelectField name='role'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
