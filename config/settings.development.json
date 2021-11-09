@@ -2,7 +2,7 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "admin" },
     { "email": "john@foo.com", "password": "changeme" },
-    { "email": "company@foo.com", "password": "changeme" }
+    { "email": "business@foo.com", "password": "changeme" }
   ],
 
   "defaultProfiles": [
@@ -10,8 +10,9 @@
       "picture": "https://dlnr.hawaii.gov/alalaproject/files/2020/03/DLNR_logo_withMask_transparent-1.jpg"},
     { "owner": "john@foo.com", "name": "John Foo", "points": 30,
       "picture": "https://react.semantic-ui.com/images/avatar/small/elliot.jpg" },
-    { "owner": "company@foo.com", "name": "Company Name", "role": "local business/organization",
-      "picture":  "https://react.semantic-ui.com/images/avatar/large/nan.jpg"}
+    { "owner": "business@foo.com", "name": "Business Name", "role": "local business/organization",
+      "picture":  "https://images.squarespace-cdn.com/content/v1/55e2518ee4b077beb02498cf/1460777088408-6ERW16MWJ6AA61BI4UOE/DSC_1144+%282%29.JPG?format=1000w"
+    }
   ],
 
   "defaultData": [
@@ -26,8 +27,9 @@
   "defaultRewards": [
     { "title": "Free Shave Ice",
       "description": "Redeem your points and get (1) small shave ice for free.",
+      "picture": "https://images.squarespace-cdn.com/content/v1/55e2518ee4b077beb02498cf/1460777088408-6ERW16MWJ6AA61BI4UOE/DSC_1144+%282%29.JPG?format=1000w",
       "points": "100",
-      "owner": "company@foo.com",
+      "owner": "business@foo.com",
       "status": "approved" }
   ]
 }

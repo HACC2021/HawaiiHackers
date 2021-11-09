@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { _ } from 'lodash';
 import { Profiles } from '../../api/profile/Profile';
@@ -16,6 +16,7 @@ class RewardCard extends React.Component {
           <Card.Meta>{name} | {this.props.rewards.rewardOwner}</Card.Meta>
           <Card.Description>
             {this.props.rewards.description}
+            <Image src={this.props.rewards.picture}/>
           </Card.Description>
         </Card.Content>
         <Card.Content extra>

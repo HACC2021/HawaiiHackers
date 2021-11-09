@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Label, Icon } from 'semantic-ui-react';
+import { Table, Label, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { _ } from 'lodash';
 import { Meteor } from 'meteor/meteor';
@@ -24,6 +24,7 @@ class RewardItem extends React.Component {
       <Table.Row>
         <Table.Cell>{this.props.reward.title}</Table.Cell>
         <Table.Cell>{this.props.reward.description}</Table.Cell>
+        <Table.Cell><Image size='small' src={this.props.reward.picture}/></Table.Cell>
         <Table.Cell>{this.props.reward.points}</Table.Cell>
         <Table.Cell>
           <Link to={`/rewards/edit/${this.props.reward._id}`}>Edit</Link>
@@ -41,6 +42,7 @@ RewardItem.propTypes = {
   reward: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
+    picture: PropTypes.string,
     points: PropTypes.number,
     status: PropTypes.string,
     redeemedBy: PropTypes.array,

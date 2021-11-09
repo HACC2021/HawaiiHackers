@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Icon } from 'semantic-ui-react';
+import { Table, Button, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { Rewards } from '../../api/reward/Reward';
@@ -29,6 +29,7 @@ class RewardItemAdmin extends React.Component {
       <Table.Row>
         <Table.Cell>{this.props.reward.title}</Table.Cell>
         <Table.Cell>{this.props.reward.description}</Table.Cell>
+        <Table.Cell><Image size='small' src={this.props.reward.picture}/></Table.Cell>
         <Table.Cell>{this.props.reward.points}</Table.Cell>
         <Table.Cell>{this.props.reward.owner}</Table.Cell>
         {this.props.reward.status === 'approved' ?
@@ -45,6 +46,7 @@ RewardItemAdmin.propTypes = {
   reward: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
+    picture: PropTypes.string,
     points: PropTypes.number,
     status: PropTypes.string,
     _id: PropTypes.string,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Button, Card, Icon } from 'semantic-ui-react';
+import { Button, Card, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { _ } from 'lodash';
@@ -28,7 +28,8 @@ class RewardItemApproved extends React.Component {
             redeemedBy: Meteor.user().username,
           },
         });
-      Meteor.call('addReward', Meteor.user().username, this.props.reward.title, this.props.reward.owner, this.props.reward.description);
+      Meteor.call('addReward', Meteor.user().username, this.props.reward.title, this.props.reward.owner,
+        this.props.reward.description, this.props.reward.picture);
       swal('Success', `You redeemed ${value} points. You have ${remainingPoints} points remaining`, 'success');
     } else {
       swal('Error', 'You do not have enough points', 'error');
@@ -44,6 +45,7 @@ class RewardItemApproved extends React.Component {
           <Card.Meta>{name} | {this.props.reward.owner}</Card.Meta>
           <Card.Description>
             {this.props.reward.description}
+            <Image src={this.props.reward.picture}/>
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
@@ -61,6 +63,7 @@ RewardItemApproved.propTypes = {
   reward: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,
+    picture: PropTypes.string,
     points: PropTypes.number,
     owner: PropTypes.string,
     redeemedBy: PropTypes.array,

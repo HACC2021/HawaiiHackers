@@ -11,6 +11,10 @@ import { Rewards } from '../../api/reward/Reward';
 const formSchema = new SimpleSchema({
   title: String,
   description: String,
+  picture: {
+    type: String,
+    optional: true,
+  },
   points: Number,
 });
 
@@ -21,9 +25,9 @@ class AddReward extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { title, description, points } = data;
+    const { title, description, picture, points } = data;
     const owner = Meteor.user().username;
-    Rewards.collection.insert({ title, description, points, owner },
+    Rewards.collection.insert({ title, description, picture, points, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -45,6 +49,7 @@ class AddReward extends React.Component {
             <Segment>
               <TextField name='title'/>
               <LongTextField name='description'/>
+              <TextField name='picture' placeholder='URL to picture'/>
               <NumField name='points' decimal={false} label='Points required'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>

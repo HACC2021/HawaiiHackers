@@ -35,6 +35,7 @@ class ProfilesCollection {
       'rewards.$.title': String,
       'rewards.$.rewardOwner': String,
       'rewards.$.description': String,
+      'rewards.$.picture': String,
       owner: String,
     }, { tracker: Tracker });
     // Attach the schema to the collection, so all attempts to insert a document are checked against schema.

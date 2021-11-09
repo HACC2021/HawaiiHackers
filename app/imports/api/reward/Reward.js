@@ -15,6 +15,10 @@ class RewardsCollection {
     this.schema = new SimpleSchema({
       title: String,
       description: String,
+      picture: {
+        type: String,
+        optional: true,
+      },
       points: Number,
       owner: String,
       status: {

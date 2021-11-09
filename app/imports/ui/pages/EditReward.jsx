@@ -15,8 +15,8 @@ class EditReward extends React.Component {
 
   // On successful submit, insert the data.
   submit(data) {
-    const { title, description, points, _id } = data;
-    Rewards.collection.update(_id, { $set: { title, description, points } }, (error) => (error ?
+    const { title, description, picture, points, _id } = data;
+    Rewards.collection.update(_id, { $set: { title, description, picture, points } }, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Reward updated successfully', 'success')));
   }
@@ -36,6 +36,7 @@ class EditReward extends React.Component {
             <Segment>
               <TextField name='title'/>
               <LongTextField name='description'/>
+              <TextField name='picture' placeholder='URL to picture'/>
               <NumField name='points' decimal={false} label='Points required'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>

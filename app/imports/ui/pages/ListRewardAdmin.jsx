@@ -25,6 +25,7 @@ class ListRewardAdmin extends React.Component {
             <Table.Row>
               <Table.HeaderCell>Title</Table.HeaderCell>
               <Table.HeaderCell>Description</Table.HeaderCell>
+              <Table.HeaderCell>Picture</Table.HeaderCell>
               <Table.HeaderCell>Points Required</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
               <Table.HeaderCell>Status</Table.HeaderCell>
