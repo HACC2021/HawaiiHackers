@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Submissions } from '../../api/submission/Submission.js';
 import { Profiles } from '../../api/profile/Profile.js';
+import { Rewards } from '../../api/reward/Reward.js';
 
 /* eslint-disable no-console */
 
@@ -28,5 +29,17 @@ if (Profiles.collection.find().count() === 0) {
   if (Meteor.settings.defaultProfiles) {
     console.log('Creating default profiles.');
     Meteor.settings.defaultProfiles.map(profile => addProfile(profile));
+  }
+}
+
+function addReward(reward) {
+  console.log(`  Adding: (${reward.title})`);
+  Rewards.collection.insert(reward);
+}
+
+if (Rewards.collection.find().count() === 0) {
+  if (Meteor.settings.defaultRewards) {
+    console.log('Creating default rewards.');
+    Meteor.settings.defaultRewards.map(reward => addReward(reward));
   }
 }

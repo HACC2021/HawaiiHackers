@@ -15,6 +15,12 @@ import AddProfile from '../pages/AddProfile';
 import EditProfile from '../pages/EditProfile';
 import Profile from '../pages/Profile';
 import AddTask from '../pages/AddTask';
+import AddReward from '../pages/AddReward';
+import RedeemedRewards from '../pages/RedeemedRewards';
+import ListReward from '../pages/ListReward';
+import RewardsPage from '../pages/RewardsPage';
+import ListRewardAdmin from '../pages/ListRewardAdmin';
+import EditReward from '../pages/EditReward';
 import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -40,8 +46,14 @@ class App extends React.Component {
             <ProtectedRoute path="/add" component={AddSubmission}/>
             <ProtectedRoute path="/list" component={ListSubmission}/>
             <ProtectedRoute path="/edit/:_id" component={EditSubmission}/>
-            <AdminProtectedRoute path="/admin" component={ListSubmissionAdmin}/>
-            <AdminProtectedRoute path="/addTask" component={AddTask}/>
+            <ProtectedRoute path="/rewards/add" component={AddReward}/>
+            <ProtectedRoute path="/rewards/list" component={ListReward}/>
+            <ProtectedRoute path="/rewards/edit/:_id" component={EditReward}/>
+            <ProtectedRoute path="/rewards/redeemed" component={RedeemedRewards}/>
+            <ProtectedRoute path="/rewards" component={RewardsPage}/>
+            <AdminProtectedRoute path="/review/submissions" component={ListSubmissionAdmin}/>
+            <AdminProtectedRoute path="/review/rewards" component={ListRewardAdmin}/>
+            <ProtectedRoute path="/addTask" component={AddTask}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>

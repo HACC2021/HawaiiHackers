@@ -1,31 +1,76 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
+import { _ } from 'lodash';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Header } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
+import { Menu, Dropdown, Header, Icon } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
+import { Profiles } from '../../api/profile/Profile';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
-class NavBar extends React.Component {
-  render() {
-    const menuStyle = { marginBottom: '10px' };
-    return (
-      <Menu style={menuStyle} attached="top" borderless inverted>
+function NavBar(props) {
+  const menuStyle = { marginBottom: '10px' };
+  return (
+    (props.ready) ? (
+      <Menu attached="top" style={menuStyle} borderless inverted>
         <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Header inverted as='h2'>Pono Points</Header>
+          <Header inverted as='h2'><Icon name='leaf'/>PonoPoints</Header>
         </Menu.Item>
-        {this.props.currentUser ? (
+        {props.currentUser ? (
           [<Menu.Item as={NavLink} activeClassName="active" exact to="/home" key='home'>Home</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Submission</Menu.Item>,
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>My Submissions</Menu.Item>]
+            <Menu.Item key='submissions'>
+              <Dropdown text="Submissions" pointing="top right">
+                <Dropdown.Menu>
+                  <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/add"/>
+                  <Dropdown.Item icon="history" text="My Submissions" as={NavLink} exact to="/list"/>
+                  {Roles.userIsInRole(Meteor.userId(), 'admin') ?
+                    <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/review/submissions"/> :
+                    ''}
+                </Dropdown.Menu>
+              </Dropdown>
+            </Menu.Item>,
+            <Menu.Item key='challenges'>
+              <Dropdown text="Challenges" pointing="top right">
+                {props.role === 'local business/organization' || Roles.userIsInRole(Meteor.userId(), 'admin') ?
+                  <Dropdown.Menu>
+                    <Dropdown.Item text="View Challenges" as={NavLink} exact to="/"/>
+                    <Dropdown.Item text="Completed Challenges" as={NavLink} exact to="/"/>
+                    <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/addTask"/>
+                    <Dropdown.Item icon="history" text="My Challenges" as={NavLink} exact to="/"/>
+                    {Roles.userIsInRole(Meteor.userId(), 'admin') ?
+                      <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/"/> :
+                      ''}
+                  </Dropdown.Menu> :
+                  <Dropdown.Menu>
+                    <Dropdown.Item text="View Challenges" as={NavLink} exact to="/"/>
+                    <Dropdown.Item text="Completed Challenges" as={NavLink} exact to="/"/>
+                  </Dropdown.Menu>}
+              </Dropdown>
+            </Menu.Item>,
+            <Menu.Item key='rewards'>
+              <Dropdown text="Rewards" pointing="top right">
+                {props.role === 'local business/organization' || Roles.userIsInRole(Meteor.userId(), 'admin') ?
+                  <Dropdown.Menu>
+                    <Dropdown.Item text="View Rewards" as={NavLink} exact to="/rewards"/>
+                    <Dropdown.Item text="Redeemed Rewards" as={NavLink} exact to="/rewards/redeemed"/>
+                    <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/rewards/add"/>
+                    <Dropdown.Item icon="history" text="My Rewards" as={NavLink} exact to="/rewards/list"/>
+                    {Roles.userIsInRole(Meteor.userId(), 'admin') ?
+                      <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/review/rewards"/> :
+                      ''}
+                  </Dropdown.Menu> :
+                  <Dropdown.Menu>
+                    <Dropdown.Item text="View Rewards" as={NavLink} exact to="/rewards"/>
+                    <Dropdown.Item text="Redeemed Rewards" as={NavLink} exact to="/rewards/redeemed"/>
+                  </Dropdown.Menu>}
+              </Dropdown>
+            </Menu.Item>,
+          ]
         ) : ''}
-        {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-          [<Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>,
-          <Menu.Item as={NavLink} activeClassName="active" exact to="/addTask" key='addTask'>Add Task</Menu.Item>]
-        ) : ''}
+
         <Menu.Item position="right">
-          {this.props.currentUser === '' ? (
+          {props.currentUser === '' ? (
             <Dropdown id="login-dropdown" text="Login" pointing="top right" icon={'user'}>
               <Dropdown.Menu>
                 <Dropdown.Item id="login-dropdown-sign-in" icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
@@ -33,7 +78,7 @@ class NavBar extends React.Component {
               </Dropdown.Menu>
             </Dropdown>
           ) : (
-            <Dropdown id="navbar-current-user" text={this.props.currentUser} pointing="top right" icon={'user'}>
+            <Dropdown id="navbar-current-user" text={props.currentUser} pointing="top right" icon={'user'}>
               <Dropdown.Menu>
                 <Dropdown.Item icon="address card" text="My Profile" as={NavLink} exact to="/profile"/>
                 <Dropdown.Item id="navbar-sign-out" icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
@@ -41,20 +86,23 @@ class NavBar extends React.Component {
             </Dropdown>
           )}
         </Menu.Item>
-      </Menu>
-    );
-  }
+      </Menu>) : ''
+  );
 }
 
-// Declare the types of all properties.
 NavBar.propTypes = {
+  ready: PropTypes.bool.isRequired,
   currentUser: PropTypes.string,
+  role: PropTypes.string,
 };
 
-// withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-const NavBarContainer = withTracker(() => ({
-  currentUser: Meteor.user() ? Meteor.user().username : '',
-}))(NavBar);
-
-// Enable ReactRouter for this component. https://reacttraining.com/react-router/web/api/withRouter
-export default withRouter(NavBarContainer);
+export default withTracker(() => {
+  const currentUser = Meteor.user() ? Meteor.user().username : '';
+  const ready = Meteor.subscribe(Profiles.userPublicationName).ready();
+  const role = _.map(Profiles.collection.find({ owner: currentUser }).fetch(), 'role')[0];
+  return {
+    ready,
+    currentUser,
+    role,
+  };
+})(NavBar);

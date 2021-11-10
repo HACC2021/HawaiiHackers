@@ -19,12 +19,13 @@ class ListSubmissionAdmin extends React.Component {
   renderPage() {
     return (
       <Container>
-        <Header as="h2" textAlign="center">All Posts (Admin)</Header>
+        <Header as="h2" textAlign="center">All Submissions (Admin)</Header>
         <Table celled>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Date</Table.HeaderCell>
               <Table.HeaderCell>Description</Table.HeaderCell>
+              <Table.HeaderCell>Picture</Table.HeaderCell>
               <Table.HeaderCell>Publication</Table.HeaderCell>
               <Table.HeaderCell>Owner</Table.HeaderCell>
               <Table.HeaderCell>Status</Table.HeaderCell>

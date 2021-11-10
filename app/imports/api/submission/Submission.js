@@ -18,6 +18,10 @@ class SubmissionsCollection {
         defaultValue: new Date(),
       },
       description: String,
+      picture: {
+        type: String,
+        optional: true,
+      },
       publication: {
         type: Boolean,
         defaultValue: true,

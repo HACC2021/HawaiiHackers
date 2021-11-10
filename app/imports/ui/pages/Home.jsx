@@ -1,8 +1,9 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Header, Loader, Feed } from 'semantic-ui-react';
+import { Container, Header, Loader, Feed, Button, Icon } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { Submissions } from '../../api/submission/Submission';
 import FeedItem from '../components/FeedItem';
 
@@ -16,9 +17,11 @@ class Home extends React.Component {
 
   // Render the page once subscriptions have been received.
   renderPage() {
+    const buttonStyle = { marginBottom: '20px' };
     return (
       <Container>
         <Header as="h2" textAlign="center">See what others are doing</Header>
+        <Button as={NavLink} exact to="/add" style={buttonStyle} color='blue'><Icon name='plus'/>Add</Button>
         <Feed.Event>
           {this.props.submissions.map((submission) => <FeedItem key={submission._id} submission={submission} />)}
         </Feed.Event>
