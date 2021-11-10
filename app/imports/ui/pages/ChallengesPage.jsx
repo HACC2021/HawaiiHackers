@@ -28,7 +28,7 @@ class ChallengesPage extends React.Component {
           <Button as={NavLink} exact to="/challenges/add" style={buttonStyle} color='blue'><Icon name='plus'/>Add</Button>
           : ''}
         <Card.Group itemsPerRow={4}>
-          {this.props.challenges.map((challenge, profile) => <ChallengeCard key={challenge._id} challenge={challenge} profile={profile}/>)}
+          {this.props.challenges.map((challenge, index) => <ChallengeCard key={index} challenge={challenge}/>)}
         </Card.Group>
       </Container>
     );
@@ -44,7 +44,7 @@ ChallengesPage.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  const subscription = Meteor.subscribe(Challenges.approvedPublicationName);
+  const subscription = Meteor.subscribe(Challenges.adminPublicationName);
   const challenges = Challenges.collection.find({}).fetch();
   const subscription2 = Meteor.subscribe(Profiles.userPublicationName);
   const profiles = Profiles.collection.find({}).fetch();

@@ -24,6 +24,39 @@
       "status": "Approved" }
   ],
 
+  "defaultChallenges": [
+    {
+      "date": "Wed Nov 11 2021 08:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "title": "Beach Clean Up",
+      "purpose": "To clean up Waikiki beach from all of the wear and tear from tourists.",
+      "instructions": "Come to Waikiki Beach anytime between 8 AM to 2 PM to help pick up trash on the sand and in the ocean.",
+      "picture":"https://live.staticflickr.com/82/261202181_290a6c16da_b.jpg",
+      "points": 10,
+      "owner": "admin@foo.com",
+      "status": "Pending"
+    },
+    {
+      "date": "Fri Nov 12 2021 08:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "title": "Koko Head Trail Cleanup",
+      "purpose": "To clean up a highly populated hiking trail and prevent Hawaii's native wildlife from eating any unwanted trash.",
+      "instructions": "Come to Koko Head anytime between 8 AM to 2 PM to help pick up trash on the trail.",
+      "picture":"https://d1l18ops95qbzp.cloudfront.net/wp-content/2019/07/19173956/kokohead.png",
+      "points": 10,
+      "owner": "admin@foo.com",
+      "status": "Pending"
+    },
+    {
+      "date": "Sun Nov 13 2021 09:00:00 GMT-1000 (Hawaii-Aleutian Standard Time)",
+      "title": "Plating Native Trees",
+      "purpose": "To provide prevent trees that are native to Hawaii from going extinct and keep Hawaii's ecosystem balanced.",
+      "instructions": "Come to Aiea Loop Trail anytime between 9 AM to 1 PM to help plant trees with the Department of Land and Natural Resources.",
+      "picture":"https://gradeatree.com/wp-content/uploads/2016/06/Tree_planting_001-1.jpg",
+      "points": 20,
+      "owner": "admin@foo.com",
+      "status": "Pending"
+    }
+  ],
+
   "defaultRewards": [
     { "title": "Free Shave Ice",
       "description": "Redeem your points and get (1) small shave ice for free.",

@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Submissions } from '../../api/submission/Submission.js';
 import { Profiles } from '../../api/profile/Profile.js';
 import { Rewards } from '../../api/reward/Reward.js';
+import { Challenges } from '../../api/challenge/Challenge.js';
 
 /* eslint-disable no-console */
 
@@ -41,5 +42,17 @@ if (Rewards.collection.find().count() === 0) {
   if (Meteor.settings.defaultRewards) {
     console.log('Creating default rewards.');
     Meteor.settings.defaultRewards.map(reward => addReward(reward));
+  }
+}
+
+function addChallenge(challenge) {
+  console.log(`  Adding: (${challenge.title})`);
+  Challenges.collection.insert(challenge);
+}
+
+if (Challenges.collection.find().count() === 0) {
+  if (Meteor.settings.defaultChallenges) {
+    console.log('Creating default challenges.');
+    Meteor.settings.defaultChallenges.map(challenge => addChallenge(challenge));
   }
 }

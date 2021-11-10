@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Image, Icon } from 'semantic-ui-react';
+import { Card, Image, Icon, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
@@ -19,12 +19,17 @@ class ChallengeCard extends React.Component {
             <br/><Icon name='leaf' color='green'/>{this.props.challenge.points}</Card.Header>
           <Card.Meta>{name} | {this.props.challenge.owner}</Card.Meta>
           <Card.Description>
-            Purpose: {this.props.challenge.purpose}
-            <br/>Instructions: {this.props.challenge.instructions}
+            <b>Purpose:</b> {this.props.challenge.purpose}
+            <br/><b>Instructions:</b> {this.props.challenge.instructions}
           </Card.Description>
         </Card.Content>
         <Card.Content extra floated='right'>
           Posted on {this.props.challenge.date.toLocaleDateString()}
+          <Button.Group>
+            <Button positive>Accept</Button>
+            <Button.Or />
+            <Button>Decline</Button>
+          </Button.Group>
         </Card.Content>
       </Card>
     );
@@ -37,7 +42,7 @@ ChallengeCard.propTypes = {
 
 export default withTracker(() => {
   // Get access to Challenge documents.
-  const subscription = Meteor.subscribe(Challenges.approvedPublicationName);
+  const subscription = Meteor.subscribe(Challenges.userPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Challenge documents
