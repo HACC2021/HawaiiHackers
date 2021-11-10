@@ -3,7 +3,7 @@ import { Roles } from 'meteor/alanning:roles';
 import { Stuffs } from '../../api/stuff/Stuff';
 import { Submissions } from '../../api/submission/Submission';
 import { Profiles } from '../../api/profile/Profile';
-import { Tasks } from '../../api/task/Task';
+import { Challenges } from '../../api/challenge/Challenge';
 import { Rewards } from '../../api/reward/Reward';
 
 // User-level publication.
@@ -16,10 +16,10 @@ Meteor.publish(Stuffs.userPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Tasks.userPublicationName, function () {
+Meteor.publish(Challenges.userPublicationName, function () {
   if (this.userId) {
     const username = Meteor.users.findOne(this.userId).username;
-    return Tasks.collection.find({ owner: username });
+    return Challenges.collection.find({ owner: username });
   }
   return this.ready();
 });
@@ -41,9 +41,9 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
   return this.ready();
 });
 
-Meteor.publish(Tasks.adminPublicationName, function () {
+Meteor.publish(Challenges.adminPublicationName, function () {
   if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-    return Tasks.collection.find();
+    return Challenges.collection.find();
   }
   return this.ready();
 });
@@ -57,7 +57,14 @@ Meteor.publish(Rewards.adminPublicationName, function () {
 
 Meteor.publish(Rewards.approvedPublicationName, function () {
   if (this.userId) {
-    return Rewards.collection.find({ status: 'approved' });
+    return Rewards.collection.find({ status: 'Approved' });
+  }
+  return this.ready();
+});
+
+Meteor.publish(Challenges.approvedPublicationName, function () {
+  if (this.userId) {
+    return Challenges.collection.find({ status: 'Approved' });
   }
   return this.ready();
 });
@@ -79,7 +86,7 @@ Meteor.publish(Submissions.adminPublicationName, function () {
 
 Meteor.publish(Submissions.feedPublicationName, function () {
   if (this.userId) {
-    return Submissions.collection.find({ status: 'approved', publication: true });
+    return Submissions.collection.find({ status: 'Approved', publication: true });
   }
   return this.ready();
 });

@@ -28,8 +28,8 @@ class SubmissionsCollection {
       },
       status: {
         type: String,
-        allowedValues: ['pending', 'approved'],
-        defaultValue: 'pending',
+        allowedValues: ['Pending', 'Approved'],
+        defaultValue: 'Pending',
       },
       likes: {
         type: Number,

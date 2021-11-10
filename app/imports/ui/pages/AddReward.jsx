@@ -50,7 +50,7 @@ class AddReward extends React.Component {
               <TextField name='title'/>
               <LongTextField name='description'/>
               <TextField name='picture' placeholder='URL to picture'/>
-              <NumField name='points' decimal={false} label='Points required'/>
+              <NumField name='points' decimal={false} min={0} placeholder='Points required'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>

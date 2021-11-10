@@ -15,7 +15,7 @@ class SubmissionItemAdmin extends React.Component {
   handleClick() {
     const value = 30;
     Submissions.collection.update(this.props.submission._id,
-      { $set: { status: 'approved' } },
+      { $set: { status: 'Approved' } },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -41,7 +41,7 @@ class SubmissionItemAdmin extends React.Component {
         <Table.Cell><Image src={this.props.submission.picture}/></Table.Cell>
         <Table.Cell>{publication}</Table.Cell>
         <Table.Cell>{this.props.submission.owner}</Table.Cell>
-        {this.props.submission.status === 'approved' ?
+        {this.props.submission.status === 'Approved' ?
           <Table.Cell>{this.props.submission.status}</Table.Cell> :
           <Table.Cell><Button positive onClick={this.handleClick}><Icon name='check'/></Button></Table.Cell>
         }

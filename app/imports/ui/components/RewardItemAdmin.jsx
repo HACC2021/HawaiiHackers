@@ -13,7 +13,7 @@ class RewardItemAdmin extends React.Component {
 
   handleClick() {
     Rewards.collection.update(this.props.reward._id,
-      { $set: { status: 'approved' } },
+      { $set: { status: 'Approved' } },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -32,7 +32,7 @@ class RewardItemAdmin extends React.Component {
         <Table.Cell><Image size='small' src={this.props.reward.picture}/></Table.Cell>
         <Table.Cell>{this.props.reward.points}</Table.Cell>
         <Table.Cell>{this.props.reward.owner}</Table.Cell>
-        {this.props.reward.status === 'approved' ?
+        {this.props.reward.status === 'Approved' ?
           <Table.Cell>{this.props.reward.status}</Table.Cell> :
           <Table.Cell><Button positive onClick={this.handleClick}><Icon name='check'/></Button></Table.Cell>
         }

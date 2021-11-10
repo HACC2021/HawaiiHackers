@@ -32,5 +32,4 @@ RewardCard.propTypes = {
   rewards: PropTypes.object,
 };
 
-// Wrap this component in withRouter since we use the <Link> React Router element.
 export default RewardCard;

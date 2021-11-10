@@ -21,7 +21,7 @@
       "picture": "https://dlnr.hawaii.gov/wp-content/uploads/2012/10/Trails.jpg",
       "publication": "true",
       "owner": "john@foo.com",
-      "status": "approved" }
+      "status": "Approved" }
   ],
 
   "defaultRewards": [
@@ -30,7 +30,7 @@
       "picture": "https://images.squarespace-cdn.com/content/v1/55e2518ee4b077beb02498cf/1460777088408-6ERW16MWJ6AA61BI4UOE/DSC_1144+%282%29.JPG?format=1000w",
       "points": "100",
       "owner": "business@foo.com",
-      "status": "approved" }
+      "status": "Approved" }
   ]
 }
 

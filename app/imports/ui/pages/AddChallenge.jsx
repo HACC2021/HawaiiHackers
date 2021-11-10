@@ -5,13 +5,19 @@ import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import { Tasks } from '../../api/task/Task';
+import { Challenges } from '../../api/challenge/Challenge';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
+  date: {
+    type: Date,
+    defaultValue: new Date(),
+  },
   title: String,
-  image: String,
-  date: Date,
+  picture: {
+    type: String,
+    optional: true,
+  },
   points: Number,
   purpose: String,
   instructions: String,
@@ -20,18 +26,18 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for adding a document. */
-class AddTask extends React.Component {
+class AddChallenge extends React.Component {
 
   // On submit, insert the data.
   submit(data, formRef) {
-    const { title, image, date, points, purpose, instructions } = data;
+    const { date, title, picture, points, purpose, instructions } = data;
     const owner = Meteor.user().username;
-    Tasks.collection.insert({ title, image, date, points, purpose, instructions, owner },
+    Challenges.collection.insert({ date, title, picture, points, purpose, instructions, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Task added successfully', 'success');
+          swal('Success', 'Challenge added successfully', 'success');
           formRef.reset();
         }
       });
@@ -43,15 +49,15 @@ class AddTask extends React.Component {
     return (
       <Grid container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">Add Task</Header>
+          <Header as="h2" textAlign="center">Add Challenge</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
-              <TextField name='title'/>
-              <TextField name='image'/>
               <DateField name='date'/>
-              <NumField name='points' decimal={false} min={0}/>
+              <TextField name='title'/>
               <LongTextField name='purpose'/>
               <LongTextField name='instructions'/>
+              <NumField name='points' decimal={false} min={0}/>
+              <TextField name='picture' placeholder='URL to picture'/>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
@@ -62,4 +68,4 @@ class AddTask extends React.Component {
   }
 }
 
-export default AddTask;
+export default AddChallenge;

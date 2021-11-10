@@ -72,11 +72,9 @@ RewardItemApproved.propTypes = {
 };
 
 export default withTracker(() => {
-  // Get access to Submission documents.
   const subscription = Meteor.subscribe(Profiles.feedPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
-  // Get the Submission documents
   const profiles = Profiles.collection.find().fetch();
   return {
     profiles,

@@ -34,17 +34,15 @@ function NavBar(props) {
               <Dropdown text="Challenges" pointing="top right">
                 {props.role === 'local business/organization' || Roles.userIsInRole(Meteor.userId(), 'admin') ?
                   <Dropdown.Menu>
-                    <Dropdown.Item text="View Challenges" as={NavLink} exact to="/"/>
-                    <Dropdown.Item text="Completed Challenges" as={NavLink} exact to="/"/>
-                    <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/addTask"/>
-                    <Dropdown.Item icon="history" text="My Challenges" as={NavLink} exact to="/"/>
+                    <Dropdown.Item text="View Challenges" as={NavLink} exact to="/challenges/view"/>
+                    <Dropdown.Item icon="plus" text="Add New" as={NavLink} exact to="/challenges/add"/>
+                    <Dropdown.Item icon="history" text="My Challenges" as={NavLink} exact to="/challenges/list"/>
                     {Roles.userIsInRole(Meteor.userId(), 'admin') ?
-                      <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/"/> :
+                      <Dropdown.Item icon="check" text="Review Requests" as={NavLink} exact to="/review/challenges"/> :
                       ''}
                   </Dropdown.Menu> :
                   <Dropdown.Menu>
-                    <Dropdown.Item text="View Challenges" as={NavLink} exact to="/"/>
-                    <Dropdown.Item text="Completed Challenges" as={NavLink} exact to="/"/>
+                    <Dropdown.Item text="View Challenges" as={NavLink} exact to="/challenges/view"/>
                   </Dropdown.Menu>}
               </Dropdown>
             </Menu.Item>,
