@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Label, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { _ } from 'lodash';
 import { Meteor } from 'meteor/meteor';
 import { withRouter, Link } from 'react-router-dom';
@@ -15,6 +16,13 @@ class RewardItem extends React.Component {
         $pull: {
           redeemedBy: this.props.reward.redeemedBy[index],
         },
+      },
+      (error) => {
+        if (error) {
+          swal('Error', error.message, 'error');
+        } else {
+          swal('Removed', 'Reward item closed successfully', 'success');
+        }
       });
     Meteor.call('deleteReward', this.props.reward.redeemedBy[index], this.props.reward.title, this.props.reward.owner, this.props.reward.description);
   }

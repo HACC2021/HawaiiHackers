@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 import { Profiles } from '../../api/profile/Profile';
 
 Meteor.methods({
@@ -16,7 +16,7 @@ Meteor.methods({
     check(title, String);
     check(rewardOwner, String);
     check(description, String);
-    check(picture, String);
+    check(picture, Match.OneOf(null, undefined, String));
     Profiles.collection.update(
       { owner: owner },
       { $push: { rewards: {
@@ -32,7 +32,7 @@ Meteor.methods({
     check(title, String);
     check(rewardOwner, String);
     check(description, String);
-    check(picture, String);
+    check(picture, Match.OneOf(null, undefined, String));
     Profiles.collection.update(
       { owner: owner },
       { $pull: { rewards: {
