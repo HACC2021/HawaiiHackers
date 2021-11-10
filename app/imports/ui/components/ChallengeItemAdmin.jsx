@@ -32,7 +32,7 @@ class ChallengeItem extends React.Component {
         <Table.Cell>{this.props.challenge.purpose}</Table.Cell>
         <Table.Cell>{this.props.challenge.instructions}</Table.Cell>
         <Table.Cell>{this.props.challenge.points}</Table.Cell>
-        <Table.Cell><Image src={this.props.challenge.picture}/></Table.Cell>
+        <Table.Cell><Image size='small' src={this.props.challenge.picture}/></Table.Cell>
         <Table.Cell>{this.props.challenge.owner}</Table.Cell>
         {this.props.challenge.status === 'Approved' ?
           <Table.Cell>{this.props.challenge.status}</Table.Cell> :

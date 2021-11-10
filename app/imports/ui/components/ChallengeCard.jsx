@@ -19,12 +19,12 @@ class ChallengeCard extends React.Component {
             <br/><Icon name='leaf' color='green'/>{this.props.challenge.points}</Card.Header>
           <Card.Meta>{name} | {this.props.challenge.owner}</Card.Meta>
           <Card.Description>
-            <b>Purpose:</b> {this.props.challenge.purpose}
+            <b>When:</b> {this.props.challenge.date.toLocaleDateString()}
+            <br/><b>Purpose:</b> {this.props.challenge.purpose}
             <br/><b>Instructions:</b> {this.props.challenge.instructions}
           </Card.Description>
         </Card.Content>
-        <Card.Content extra floated='right'>
-          Posted on {this.props.challenge.date.toLocaleDateString()}
+        <Card.Content extra>
           <Button.Group>
             <Button positive>Accept</Button>
             <Button.Or />
@@ -42,7 +42,7 @@ ChallengeCard.propTypes = {
 
 export default withTracker(() => {
   // Get access to Challenge documents.
-  const subscription = Meteor.subscribe(Challenges.userPublicationName);
+  const subscription = Meteor.subscribe(Challenges.approvedPublicationName);
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Challenge documents

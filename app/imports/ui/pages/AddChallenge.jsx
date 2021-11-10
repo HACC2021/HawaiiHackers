@@ -37,7 +37,7 @@ class AddChallenge extends React.Component {
         if (error) {
           swal('Error', error.message, 'error');
         } else {
-          swal('Success', 'Challenge added successfully', 'success');
+          swal('Success', 'Challenge added successfully. Please wait for admin approval.', 'success');
           formRef.reset();
         }
       });

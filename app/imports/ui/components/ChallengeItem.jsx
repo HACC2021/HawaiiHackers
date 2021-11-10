@@ -13,7 +13,7 @@ class ChallengeItem extends React.Component {
         <Table.Cell>{this.props.challenge.purpose}</Table.Cell>
         <Table.Cell>{this.props.challenge.instructions}</Table.Cell>
         <Table.Cell>{this.props.challenge.points}</Table.Cell>
-        <Table.Cell><Image src={this.props.challenge.picture}/></Table.Cell>
+        <Table.Cell><Image size='small' src={this.props.challenge.picture}/></Table.Cell>
         <Table.Cell>
           <Link to={`/challenges/edit/${this.props.challenge._id}`}>Edit</Link>
         </Table.Cell>

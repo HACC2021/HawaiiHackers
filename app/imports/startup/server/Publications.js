@@ -42,7 +42,7 @@ Meteor.publish(Stuffs.adminPublicationName, function () {
 });
 
 Meteor.publish(Challenges.adminPublicationName, function () {
-  if (this.userId) {
+  if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
     return Challenges.collection.find();
   }
   return this.ready();
