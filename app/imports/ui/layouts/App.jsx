@@ -23,6 +23,7 @@ import EditReward from '../pages/EditReward';
 import AddChallenge from '../pages/AddChallenge';
 import ListChallenge from '../pages/ListChallenge';
 import ChallengesPage from '../pages/ChallengesPage';
+import AcceptedChallengesPage from '../pages/AcceptedChallengesPage';
 import ListChallengeAdmin from '../pages/ListChallengeAdmin';
 import EditChallenge from '../pages/EditChallenge';
 import Home from '../pages/Home';
@@ -59,6 +60,7 @@ class App extends React.Component {
             <ProtectedRoute path="/rewards/redeemed" component={RedeemedRewards}/>
             <ProtectedRoute path="/rewards" component={RewardsPage}/>
             <ProtectedRoute path="/challenges/view" component={ChallengesPage}/>
+            <ProtectedRoute path="/challenges/accepted" component={AcceptedChallengesPage}/>
             <AdminProtectedRoute path="/review/submissions" component={ListSubmissionAdmin}/>
             <AdminProtectedRoute path="/review/rewards" component={ListRewardAdmin}/>
             <AdminProtectedRoute path="/review/challenges" component={ListChallengeAdmin}/>
